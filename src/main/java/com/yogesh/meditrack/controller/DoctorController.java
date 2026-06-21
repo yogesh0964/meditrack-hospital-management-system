@@ -4,6 +4,8 @@ import com.yogesh.meditrack.entity.Doctor;
 import com.yogesh.meditrack.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -27,13 +29,12 @@ public class DoctorController {
         return doctorService.getAllDoctors();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:\\d+}")
     public Doctor getDoctor(
             @PathVariable Long id) {
 
         return doctorService.getDoctorById(id);
     }
-
     @PutMapping("/{id}")
     public Doctor updateDoctor(
             @PathVariable Long id,
@@ -49,5 +50,25 @@ public class DoctorController {
         doctorService.deleteDoctor(id);
 
         return "Doctor Deleted Successfully";
+    }
+    @GetMapping("/search")
+    public List<Doctor> searchDoctor(
+            @RequestParam String name){
+
+        return doctorService.searchDoctor(name);
+    }
+    @GetMapping("/pagination")
+    public Page<Doctor> getDoctorsPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        return doctorService.getDoctorsPage(
+                page,
+                size);
+    }
+    @GetMapping("/sort")
+    public List<Doctor> sortDoctors() {
+
+        return doctorService.sortDoctors();
     }
 }

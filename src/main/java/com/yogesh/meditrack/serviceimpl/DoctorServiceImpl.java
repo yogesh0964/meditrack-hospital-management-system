@@ -4,7 +4,10 @@ import com.yogesh.meditrack.entity.Doctor;
 import com.yogesh.meditrack.repository.DoctorRepository;
 import com.yogesh.meditrack.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -61,5 +64,25 @@ public class DoctorServiceImpl
     @Override
     public void deleteDoctor(Long id) {
         doctorRepository.deleteById(id);
+    }
+    @Override
+    public List<Doctor> searchDoctor(String name) {
+
+        return doctorRepository
+                .findByDoctorNameContainingIgnoreCase(name);
+    }
+    @Override
+    public Page<Doctor> getDoctorsPage(
+            int page,
+            int size) {
+
+        return doctorRepository.findAll(
+                PageRequest.of(page, size));
+    }
+    @Override
+    public List<Doctor> sortDoctors() {
+
+        return doctorRepository.findAll(
+                Sort.by("doctorName"));
     }
 }
