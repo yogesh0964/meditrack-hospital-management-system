@@ -21,7 +21,6 @@ export default function AdminLayout() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
       <aside className="w-64 bg-blue-700 text-white flex flex-col">
         <div className="px-6 py-5 text-2xl font-bold border-b border-blue-600">
           MediTrack
@@ -57,7 +56,6 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col">
         <header className="bg-white shadow px-6 py-4 flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-700">Admin Panel</h2>

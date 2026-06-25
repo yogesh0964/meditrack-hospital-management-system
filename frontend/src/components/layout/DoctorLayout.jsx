@@ -1,11 +1,12 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import { LayoutDashboard, CalendarCheck, FileText, LogOut } from "lucide-react";
+import { LayoutDashboard, CalendarCheck, FileText, Stethoscope, LogOut } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 const navItems = [
   { name: "Dashboard", path: "/doctor", icon: LayoutDashboard },
   { name: "Appointments", path: "/doctor/appointments", icon: CalendarCheck },
   { name: "Prescriptions", path: "/doctor/prescriptions", icon: FileText },
+  { name: "Medical Records", path: "/doctor/medical-records", icon: Stethoscope },
 ];
 
 export default function DoctorLayout() {

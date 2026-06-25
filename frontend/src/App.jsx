@@ -20,6 +20,7 @@ import PatientLayout from "./components/layout/PatientLayout";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 import BookAppointment from "./pages/patient/BookAppointment";
 import MyRecords from "./pages/patient/MyRecords";
+import DoctorMedicalRecords from "./pages/doctor/DoctorMedicalRecords";
 
 function App() {
   return (
@@ -54,11 +55,11 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<DoctorDashboard />} />
-            <Route path="appointments" element={<DoctorAppointments />} />
-            <Route path="prescriptions" element={<DoctorPrescriptions />} />
-          </Route>
-
+           <Route index element={<DoctorDashboard />} />
+           <Route path="appointments" element={<DoctorAppointments />} />
+           <Route path="prescriptions" element={<DoctorPrescriptions />} />
+           <Route path="medical-records" element={<DoctorMedicalRecords />} />
+           </Route>
           {/* Patient routes */}
           <Route
             path="/patient"
