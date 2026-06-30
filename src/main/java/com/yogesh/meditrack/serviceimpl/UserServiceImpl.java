@@ -1,5 +1,6 @@
 package com.yogesh.meditrack.serviceimpl;
 
+import com.yogesh.meditrack.dto.AuthResponse;
 import com.yogesh.meditrack.dto.LoginRequest;
 import com.yogesh.meditrack.dto.RegisterRequest;
 import com.yogesh.meditrack.entity.Role;
@@ -51,23 +52,23 @@ public class UserServiceImpl
     }
 
     @Override
-    public String login(
-            LoginRequest request){
+    public AuthResponse login(LoginRequest request) {
 
-        User user =
-                userRepository.findByEmail(
-                                request.getEmail())
-                        .orElseThrow();
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid Credentials"));
 
-        if(passwordEncoder.matches(
-                request.getPassword(),
-                user.getPassword())){
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
 
-            return jwtUtil.generateToken(
-                    user.getEmail());
+            String token = jwtUtil.generateToken(user.getEmail());
+
+            return new AuthResponse(
+                    token,
+                    user.getName(),
+                    user.getEmail(),
+                    user.getRole().getName()
+            );
         }
 
-        throw new RuntimeException(
-                "Invalid Credentials");
+        throw new RuntimeException("Invalid Credentials");
     }
 }
